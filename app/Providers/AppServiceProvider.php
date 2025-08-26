@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+use App\Repositories\BusinessUnitRepository;
+use App\Interfaces\BusinessUnitRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(
+            BusinessUnitRepositoryInterface::class,
+            BusinessUnitRepository::class
+        );
     }
 
     /**
@@ -19,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::define('manage-setup', function ($user) {
+            return $user->isSuperAdmin();
+        });
     }
 }
