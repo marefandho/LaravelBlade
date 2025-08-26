@@ -7,4 +7,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 ## About Repositories
-This is initial setup for Laravel 12 development using Blade, Vite, PostCSS, and TailwindCSS v.4
+This is simple POS app of Laravel 12 development using Blade, Vite, PostCSS, Alpine.js, and TailwindCSS v.4. It also implement Clean Code Architecture for small app projet.
