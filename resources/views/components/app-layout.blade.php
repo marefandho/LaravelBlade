@@ -13,16 +13,7 @@
     <div class="flex h-screen overflow-hidden">
         <x-sidebar />
         <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Top Bar -->
-            <header class="flex justify-between items-center bg-white border-b border-gray-200 px-6 h-16">
-                <div class="flex items-center gap-4 ml-auto">
-                    <div class="flex items-center space-x-2">
-                        <x-fontisto-jenkins class="w-8 h-8 text-gray-500" />
-                        <span class="text-sm font-medium text-gray-700">{{ auth()->user()->name }}</span>
-                        <x-fontisto-caret-down class="w-3 h-3 text-gray-500" />
-                    </div>
-                </div>
-            </header>
+            <x-header />
 
             <!-- Content -->
             <main class="p-6 bg-gray-50 overflow-y-auto flex-1 w-full">

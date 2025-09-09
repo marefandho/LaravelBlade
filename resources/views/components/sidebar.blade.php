@@ -1,7 +1,11 @@
+@php
+    $setupActive = request()->routeIs('company.*') || 
+    request()->routeIs('business-units.*') || request()->routeIs('users.*');
+@endphp
 <aside 
     x-data="{ 
         collapse: false,
-        openMenus: { item: false, setup: false } 
+        openMenus: { item: false, setup: {{ $setupActive ? 'true' : 'false' }} } 
     }" 
     :class="collapse ? 'w-26':'w-64'"
     class="bg-indigo-600 text-white flex flex-col py-4">
@@ -26,40 +30,46 @@
     <nav class="flex-1 px-4 py-6 space-y-1 text-sm">
         <!-- Dashboard -->
         <a href="{{ route('dashboard') }}" 
-            class="flex items-center gap-2 px-3 py-2 rounded hover:bg-indigo-500 bg-indigo-700
+            class="flex items-center gap-2 px-3 py-2 rounded hover:bg-indigo-500
             {{ request()->routeIs('dashboard') ? 'bg-indigo-700 text-white' : 'text-indigo-200' }}">
             <x-heroicon-m-home class="w-6 h-6" />
             <span x-show="!collapse">Dashboard</span>
         </a>
         <div>
             <button @click="openMenus.item = !openMenus.item; collapse = false"
-                    class="flex items-center w-full gap-2 px-3 py-2 rounded hover:bg-indigo-500 cursor-pointer">
+                    class="flex items-center w-full gap-2 px-3 py-2 rounded hover:bg-indigo-500 
+                    cursor-pointer">
                 <x-fontisto-redis class="w-6 h-6" />
                 <span x-show="!collapse">Items</span>
                 <x-heroicon-s-chevron-right :class="openMenus.item ? 'rotate-90' : ''" class="w-4 h-4 ml-auto transform transition-transform" />
             </button>
             <div x-show="openMenus.item" x-collapse class="ml-6 mt-1 space-y-1 text-sm text-indigo-200">
-                <a href="#" class="block px-3 py-1 rounded hover:bg-indigo-500">Brand</a>
-                <a href="#" class="block px-3 py-1 rounded hover:bg-indigo-500">Category</a>
+                <a href="{{ route('brands.index') }}" class="block px-3 py-1 rounded hover:bg-indigo-500">Brand</a>
+                <a href="{{ route('item-categories.index') }}" class="block px-3 py-1 rounded hover:bg-indigo-500">Category</a>
                 <a href="#" class="block px-3 py-1 rounded hover:bg-indigo-500">Listed Items</a>
             </div>
         </div>
+        
         @can('manage-setup')
             <div>
                 <button @click="openMenus.setup = !openMenus.setup; collapse = false"
-                        class="flex items-center w-full gap-2 px-3 py-2 rounded hover:bg-indigo-500 cursor-pointer">
+                        class="flex items-center w-full gap-2 px-3 py-2 rounded hover:bg-indigo-500 
+                        cursor-pointer {{ $setupActive ? 'bg-indigo-700 text-white' : '' }}">
                     <x-heroicon-c-cog-8-tooth class="w-6 h-6" />
                     <span x-show="!collapse">Setup</span>
                     <x-heroicon-s-chevron-right :class="openMenus.setup ? 'rotate-90' : ''" class="w-4 h-4 ml-auto transform transition-transform" />
                 </button>
                 <div x-show="openMenus.setup" x-collapse class="ml-6 mt-1 space-y-1 text-sm text-indigo-200">
-                    <a href="{{ route('company.edit') }}" class="block px-3 py-1 rounded hover:bg-indigo-500">Companies</a>
+                    <a href="{{ route('company.edit') }}" class="block px-3 py-1 rounded hover:bg-indigo-500
+                    {{ request()->routeIs('company.edit') ? 'bg-indigo-700 text-white' : 'text-indigo-200' }}">Companies</a>
                     <a href="{{ route('business-units.index') }}" 
                         class="block px-3 py-1 rounded hover:bg-indigo-500
                         {{ request()->routeIs('business-units.index') ? 'bg-indigo-700 text-white' : 'text-indigo-200' }}">
                         Business Unit
                     </a>
-                    <a href="#" class="block px-3 py-1 rounded hover:bg-indigo-500">Users</a>
+                    <a href="{{ route('users.index') }}" 
+                        class="block px-3 py-1 rounded hover:bg-indigo-500
+                        {{ request()->routeIs('users.index') ? 'bg-indigo-700 text-white' : 'text-indigo-200' }}">Users</a>
                 </div>
             </div>
         @endcan

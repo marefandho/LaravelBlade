@@ -1,5 +1,5 @@
 <x-app-layout>
-  <div class="container mx-auto py-6">
+  <div class="container mr-auto py-4 w-1/2">
     <div class="mb-4">
         <h2 class="text-xl font-bold">
             {{ isset($units) ? 'Edit Business Unit' : 'Create Business Unit' }}

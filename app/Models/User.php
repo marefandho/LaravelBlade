@@ -20,10 +20,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
-        'role_id',
-        'company_id',
-        'business_unit_id',
     ];
 
     protected $hidden = [
@@ -49,5 +45,10 @@ class User extends Authenticatable
     public function isSuperAdmin(): bool
     {
         return $this->role?->name === 'super_admin';
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'id';
     }
 }

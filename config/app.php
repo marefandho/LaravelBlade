@@ -123,4 +123,5 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'super_admin_role_id' => 'd1761cc9-e578-46c1-8430-f03397afb406',
 ];

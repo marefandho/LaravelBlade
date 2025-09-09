@@ -2,6 +2,7 @@ document.addEventListener('alpine:init', () => {
   Alpine.data('modalHandler', () => ({
     isOpen: false,
     title: '',
+    type: '',
     content: '',
     cancelText: null,
     confirmText: null,
@@ -13,6 +14,7 @@ document.addEventListener('alpine:init', () => {
       window.addEventListener('open-modal', e => {
         this.openModal(
           e.detail.title,
+          e.detail.type,
           e.detail.content,
           e.detail.cancelText,
           e.detail.confirmText,
@@ -23,9 +25,10 @@ document.addEventListener('alpine:init', () => {
       })
     },
 
-    openModal(title, content, cancelText, confirmText, confirmColor, actionURL, actionMethod) {
+    openModal(title, type, content, cancelText, confirmText, confirmColor, actionURL, actionMethod) {
       this.isOpen = true
       this.title = title
+      this.type = type
       this.content = content
       this.cancelText = cancelText
       this.confirmText = confirmText

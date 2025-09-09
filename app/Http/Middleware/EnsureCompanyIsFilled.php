@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Company;
 use App\Models\BusinessUnit;
 
@@ -18,7 +17,6 @@ class EnsureCompanyIsFilled
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = Auth::user();
         $hasCompany = Company::exists();
         $hasBusinessUnit = BusinessUnit::exists();
         if (!$hasCompany && ! $request->routeIs(['company.edit', 'company.update'])) {

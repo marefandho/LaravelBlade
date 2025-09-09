@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             'id' => Str::uuid(),
             'name' => 'Super Admin',
             'email' => 'superadmin@example.com',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('567password'),
             'role_id' => $superAdminRole->id,
             'company_id' => null,
             'business_unit_id' => null,
